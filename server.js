@@ -1,5 +1,7 @@
 const express = require('express');
 const axios = require('axios');
+const os = require('os');
+const process = require('process');
 
 const app = express();
 const port = process.env.PORT || 3000;  // port from env or default to 3000
@@ -34,15 +36,13 @@ app.get('/youtube', async (req, res) => {
 });
 
 app.get('/health', (req, res) => {
-  const osName = process.platform;
-  const nodeVersion = process.version;
-  const memoryUsage = process.memoryUsage();
-  const cpuUsage = process.cpuUsage();
+  const freeMemory = os.freemem() / os.totalmem() * 100;
+  const cpuLoad = os.cpus().reduce((acc, cpu) => acc + cpu.times.user, 0) / (os.cpus().length * os.uptime()) * 100;
 
   res.json({
-    osName,
-    nodeVersion,
-    memoryUsage,
-    cpuUsage,
+    os: os.platform(),
+    nodeVersion: process.version,
+    memoryUsage: `${freeMemory.toFixed(2)}%`,
+    cpuUsage: `${cpuLoad.toFixed(2)}%`,
   });
 });
