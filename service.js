@@ -4,21 +4,11 @@ const os = require('os');
 const process = require('process');
 
 const app = express();
-const port = 3000;  // default to 3000
+const port = process.env.PORT || 3000;  // port from env or default to 3000
+
+app.listen(port, () => console.log(`Server listening on port ${port}`));
 
 const YOUTUBE_API_KEY = 'AIzaSyBaL25MFJikE8NYtAHhNcIr4V7PXIs36KE';  // My API Key
-
-app.get('/health', (req, res) => {
-  const freeMemory = os.freemem() / os.totalmem() * 100;
-  const cpuLoad = os.cpus().reduce((acc, cpu) => acc + cpu.times.user, 0) / (os.cpus().length * os.uptime()) * 100;
-
-  res.json({
-    os: os.platform(),
-    nodeVersion: process.version,
-    memoryUsage: `${freeMemory.toFixed(2)}%`,
-    cpuUsage: `${cpuLoad.toFixed(2)}%`,
-  });
-});
 
 app.get('/youtube', async (req, res) => {
   try {
@@ -45,4 +35,16 @@ app.get('/youtube', async (req, res) => {
   }
 });
 
-app.listen(port, () => console.log(`Server listening on port ${port}`));
+app.get('/health', (req, res) => {
+  const osName = process.platform;
+  const nodeVersion = process.version;
+  const memoryUsage = process.memoryUsage();
+  const cpuUsage = process.cpuUsage();
+
+  res.json({
+    osName,
+    nodeVersion,
+    memoryUsage,
+    cpuUsage,
+  });
+});
