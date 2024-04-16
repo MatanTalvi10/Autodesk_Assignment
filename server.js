@@ -22,13 +22,14 @@ app.get('/youtube', async (req, res) => {
         q: 'Autodesk',
         type: 'video',
         key: YOUTUBE_API_KEY,
+        fields: 'items(id(kind,videoId), snippet(title, length, viewCount))',
       },
     });
     
     const videos = response.data.items.map((item) => ({
       title: item.snippet.title,
       length: item.snippet.length, 
-      views: item.snippet.viewCount,
+      views: item.snippet.viewCount, 
     }));
     
     res.json(videos);
