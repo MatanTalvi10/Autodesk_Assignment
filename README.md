@@ -38,9 +38,9 @@ cpuUsage: CPU usage of the machine (percentage value)
 2. Navigate to the project directory:
    cd [Your Project Directory]
 3. Build the Docker image:
-   docker build -t [Your Docker Image Name] .
+   docker build -t youtube-autodesk-demo .
 4. Run the Docker container:
-   docker run -p 3000:3000 [Your Docker Image Name]
+   docker run -p 3000:3000 youtube-autodesk-demo
 5. Access the API at http://localhost:3000.
 
 
