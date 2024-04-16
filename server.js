@@ -7,7 +7,7 @@ const app = express();
 const port = process.env.PORT || 3000;  // port from env or default to 3000
 
 
-const YOUTUBE_API_KEY = 'AIzaSyBaL25MFJikE8NYtAHhNcIr4V7PXIs36KE';  // My API Key
+const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY;
 
 app.get('/',(req, res) => {
   res.send("youtube-autodesk")
