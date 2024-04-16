@@ -34,7 +34,7 @@ cpuUsage: CPU usage of the machine (percentage value)
 
 **Running Locally with Docker**
 1. Clone the repository from Github:
-   git clone [Your Github Repository URL]
+   git clone https://github.com/MatanTalvi10/Autodesk_Assignment.git
 2. Navigate to the project directory:
    cd [Your Project Directory]
 3. Build the Docker image:
