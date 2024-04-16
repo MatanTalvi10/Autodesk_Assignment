@@ -22,7 +22,7 @@ app.get('/youtube', async (req, res) => {
 
     const videos = response.data.items.map((item) => ({
       title: item.snippet.title,
-      length: null, // This API doesn't provide video length
+      length: item.snippet.length, 
       views: item.snippet.viewCount,
     }));
 
